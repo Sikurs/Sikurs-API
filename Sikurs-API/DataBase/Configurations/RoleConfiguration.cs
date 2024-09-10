@@ -4,50 +4,47 @@ using Sikurs_DataAccess;
 
 namespace Sikurs_API.DataBase.Configurations
 {
-    public class CollectionConfiguration : IEntityTypeConfiguration<Collection>
+    public class RoleConfiguration : IEntityTypeConfiguration<Role>
     {
-        public void Configure(EntityTypeBuilder<Collection> builder)
+        public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.HasQueryFilter(c => c.IsEnabled);
+            builder.HasQueryFilter(r => r.IsEnabled);
 
-            builder.HasKey(c => c.Id);
+            builder.HasKey(r => r.Id);
 
             builder
-                .Property(c => c.Id)
+                .Property(r => r.Id)
                 .IsRequired()
                 .HasMaxLength(36)
                 .ValueGeneratedOnAdd();
 
             builder
-                .Property(c => c.Name)
+                .Property(r => r.Name)
                 .IsRequired()
                 .HasMaxLength(50);
 
             builder
-                .Property(c => c.OrganizationId)
-                .IsRequired()
-                .HasMaxLength(36);
+                .Property(r => r.Description)
+                .HasMaxLength(250);
 
             #region Relationships
             builder
-                .HasOne(c => c.Organization)
-                .WithMany(o => o.Collections)
-                .HasForeignKey(c => c.OrganizationId)
-                .IsRequired();
+                .HasMany(r => r.Permissions)
+                .WithOne(p => p.Role)
+                .HasForeignKey(p => p.RoleId);
 
             builder
-                .HasMany(c => c.Boxes)
-                .WithOne(b => b.Collection)
-                .HasForeignKey(b => b.CollectionId);
+                .HasMany(r => r.Users)
+                .WithOne(u => u.Role)
+                .HasForeignKey(u => u.RoleId);
             #endregion
 
             #region CreateAt
             builder
-                .Property(c => c.CreateAt)
+                .Property(r => r.CreateAt)
                 .ValueGeneratedOnAdd();
 
-            builder
-                .Property(c => c.CreateById)
+            builder.Property(r => r.CreateById)
                 .IsRequired()
                 .HasMaxLength(36)
                 .ValueGeneratedOnAdd();
@@ -55,11 +52,10 @@ namespace Sikurs_API.DataBase.Configurations
 
             #region UpdateAt
             builder
-                .Property(c => c.UpdateAt)
+                .Property(r => r.UpdateAt)
                 .ValueGeneratedOnAddOrUpdate();
 
-            builder
-                .Property(c => c.UpdateById)
+            builder.Property(r => r.UpdateById)
                 .IsRequired()
                 .HasMaxLength(36)
                 .ValueGeneratedOnAddOrUpdate();

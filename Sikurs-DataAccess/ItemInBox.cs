@@ -9,8 +9,8 @@ namespace Sikurs_DataAccess
 {
     public class ItemInBox : BaseEntity
     {
-        public string? Name { get; set; }
         public decimal Count { get; set; }
+        public string? Name { get; set; }
 
         public Guid? ItemId { get; set; }
         public Item Item { get; set; } = default!;

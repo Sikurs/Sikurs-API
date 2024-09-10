@@ -8,6 +8,8 @@ namespace Sikurs_API.DataBase.Configurations
     {
         public void Configure(EntityTypeBuilder<Box> builder)
         {
+            builder.HasQueryFilter(b => b.IsEnabled);
+
             builder.HasKey(b => b.Id);
 
             builder
@@ -33,16 +35,16 @@ namespace Sikurs_API.DataBase.Configurations
 
             #region Relationships
             builder
-                    .HasOne(b => b.Collection)
-                    .WithMany(g => g.Boxes)
-                    .HasForeignKey(b => b.CollectionId)
-                    .IsRequired();
+                .HasOne(b => b.Collection)
+                .WithMany(c => c.Boxes)
+                .HasForeignKey(b => b.CollectionId)
+                .IsRequired();
 
             builder
-                    .HasOne(b => b.GroupOfItem)
-                    .WithMany(g => g.Boxes)
-                    .HasForeignKey(b => b.GroupOfItemId)
-                    .IsRequired();
+                .HasOne(b => b.GroupOfItem)
+                .WithMany(g => g.Boxes)
+                .HasForeignKey(b => b.GroupOfItemId)
+                .IsRequired();
 
             builder
                 .HasMany(b => b.ItemsInBox)
@@ -51,8 +53,9 @@ namespace Sikurs_API.DataBase.Configurations
             #endregion
 
             #region CreateAt
-            builder.Property(b => b.CreateAt)
-                    .ValueGeneratedOnAdd();
+            builder
+                .Property(b => b.CreateAt)
+                .ValueGeneratedOnAdd();
 
             builder.Property(b => b.CreateById)
                 .IsRequired()
@@ -61,10 +64,12 @@ namespace Sikurs_API.DataBase.Configurations
             #endregion
 
             #region UpdateAt
-            builder.Property(e => e.UpdateAt)
-                    .ValueGeneratedOnAddOrUpdate();
+            builder
+                .Property(b => b.UpdateAt)
+                .ValueGeneratedOnAddOrUpdate();
 
-            builder.Property(e => e.UpdateById)
+            builder
+                .Property(b => b.UpdateById)
                 .IsRequired()
                 .HasMaxLength(36)
                 .ValueGeneratedOnAddOrUpdate();

@@ -9,6 +9,8 @@ namespace Sikurs_API.DataBase.Configurations
     {
         public void Configure(EntityTypeBuilder<ItemAttribute> builder)
         {
+            builder.HasQueryFilter(a => a.IsEnabled);
+
             builder.HasKey(a => a.Id);
 
             builder
@@ -29,10 +31,10 @@ namespace Sikurs_API.DataBase.Configurations
 
             #region Relationships
             builder
-                    .HasOne(a => a.GroupOfItem)
-                    .WithMany(g => g.Attributes)
-                    .HasForeignKey(a => a.GroupOfItemId)
-                    .IsRequired();
+                .HasOne(a => a.GroupOfItem)
+                .WithMany(g => g.Attributes)
+                .HasForeignKey(a => a.GroupOfItemId)
+                .IsRequired();
 
             builder
                 .HasMany(a => a.AttributeOfItems)
@@ -41,20 +43,24 @@ namespace Sikurs_API.DataBase.Configurations
             #endregion
 
             #region CreateAt
-            builder.Property(a => a.CreateAt)
-                    .ValueGeneratedOnAdd();
+            builder
+                .Property(a => a.CreateAt)
+                .ValueGeneratedOnAdd();
 
-            builder.Property(a => a.CreateById)
+            builder
+                .Property(a => a.CreateById)
                 .IsRequired()
                 .HasMaxLength(36)
                 .ValueGeneratedOnAdd(); 
             #endregion
 
             #region UpdateAt
-            builder.Property(a => a.UpdateAt)
-                    .ValueGeneratedOnAddOrUpdate();
+            builder
+                .Property(a => a.UpdateAt)
+                .ValueGeneratedOnAddOrUpdate();
 
-            builder.Property(a => a.UpdateById)
+            builder
+                .Property(a => a.UpdateById)
                 .IsRequired()
                 .HasMaxLength(36)
                 .ValueGeneratedOnAddOrUpdate();

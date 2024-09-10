@@ -8,30 +8,30 @@ namespace Sikurs_API.DataBase.Configurations
     {
         public void Configure(EntityTypeBuilder<Gratitude> builder)
         {
-            builder.HasKey(a => a.Id);
+            builder.HasKey(g => g.Id);
 
             builder
-                .Property(a => a.Id)
+                .Property(g => g.Id)
                 .IsRequired()
                 .HasMaxLength(36)
                 .ValueGeneratedOnAdd();
 
             builder
-                .Property(a => a.Name)
+                .Property(g => g.Name)
                 .IsRequired()
                 .HasMaxLength(50);
 
             builder
-                .Property(a => a.Reason)
+                .Property(g => g.Reason)
                 .IsRequired()
                 .HasMaxLength(250);
 
             builder
-                .Property(a => a.SiteUrl)
+                .Property(g => g.SiteUrl)
                 .HasMaxLength(250);
 
             builder
-                .Property(a => a.PictureUrl)
+                .Property(g => g.PictureUrl)
                 .HasMaxLength(250);
         }
     }

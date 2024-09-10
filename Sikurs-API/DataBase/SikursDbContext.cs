@@ -2,7 +2,7 @@
 using Sikurs_DataAccess;
 using Sikurs_DataAccess.Base;
 using ItemAttribute = Sikurs_DataAccess.ItemAttribute;
-using Version = Sikurs_DataAccess.Version;
+using ReleaseVersion = Sikurs_DataAccess.ReleaseVersion;
 
 namespace Sikurs_API.DataBase
 {
@@ -21,7 +21,7 @@ namespace Sikurs_API.DataBase
         public DbSet<Role> Roles { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Version> Versions { get; set; }
+        public DbSet<ReleaseVersion> Versions { get; set; }
 
         public override int SaveChanges()
         {

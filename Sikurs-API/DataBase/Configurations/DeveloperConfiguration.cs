@@ -8,30 +8,30 @@ namespace Sikurs_API.DataBase.Configurations
     {
         public void Configure(EntityTypeBuilder<Developer> builder)
         {
-            builder.HasKey(a => a.Id);
+            builder.HasKey(d => d.Id);
 
             builder
-                .Property(a => a.Id)
+                .Property(d => d.Id)
                 .IsRequired()
                 .HasMaxLength(36)
                 .ValueGeneratedOnAdd();
 
             builder
-                .Property(a => a.Name)
+                .Property(d => d.Name)
                 .IsRequired()
                 .HasMaxLength(50);
 
             builder
-                .Property(a => a.Role)
+                .Property(d => d.Role)
                 .IsRequired()
                 .HasMaxLength(50);
 
             builder
-                .Property(a => a.SiteUrl)
+                .Property(d => d.SiteUrl)
                 .HasMaxLength(250);
 
             builder
-                .Property(a => a.PictureUrl)
+                .Property(d => d.PictureUrl)
                 .HasMaxLength(250);
         }
     }
